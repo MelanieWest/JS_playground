@@ -1,0 +1,9 @@
+things to practice:
+1. working with objects and classes
+2. rendering with react
+3. navigating with routers
+4. pull from API's
+5. pull from databases
+6. orm's
+7. Basic javascript /library
+8. php
