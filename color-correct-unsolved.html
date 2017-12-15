@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Correct Color Picker</title>
+
+  <!-- Bootstrap File -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+  <!-- JQuery -->
+  <script src="https://code.jquery.com/jquery.js"></script>
+
+  <style>
+    #rand-target-color,
+    #color-picker li {
+      font-size: 24px;
+    }
+  </style>
+
+</head>
+<body>
+
+  <div class="container">
+    <h2>Correct Color Picker</h2>
+    <p>Pick the <b>color</b> of the word shown from the list below it.</p>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">
+
+          <!-- Create random target color -->
+          <span id="rand-target-color">
+          </span>
+
+        </h3>
+      </div>
+      <div class="panel-body">
+
+        <!-- Create colors to pick -->
+        <ul class="list-unstyled" id="color-picker">
+        </ul>
+
+      </div>
+       <div class = "button">
+         <button id="start" class = "primary"> Start </button>
+       </div>
+    </div>
+  </div>
+
+  <h2 id = "message"></h2>
+
+  <script>
+
+    // JavaScript function that wraps everything
+    $(document).ready(function() {
+
+      // Array for word colors
+      var colorsOfText = ['brown','blue','magenta','teal','coral','black'];
+
+      // Target word
+      var targetColor;    //I didn't use this var - it's contained in a function & not needed outside
+
+
+      // Target word color
+      var targetColorOfText;
+
+      // User"s selection
+      var userAnswer;   //I didn't use this var - comparison is made within a click function
+
+      // Array for words
+      var colors = [
+        "brown",
+        "blue",
+        "magenta",
+        "teal",
+        "coral",
+        "black"
+      ];
+
+//start or reset with a button click-----------------------------------------------
+
+    $("#start").on("click",function(){
+
+      clear();    //empty the printed list for a new game
+
+       //call the randColor function to display the target word and return the color of the word
+
+      targetColorOfText = randColor(); 
+      console.log(targetColorOfText); 
+
+      createColorPicker();  // this creates the random list for selecting an answer
+
+      // nothing will happen unless the user clicks on a color
+      return targetColorOfText
+     })
+//--------------------------the program main is here in the dotted lines-------------------
+
+      // This function sets a random color "word" and a random set of colors "visuals"
+
+      function randColor() {
+        // Set random word
+        var randWordIndex = Math.floor(Math.random()*colors.length);
+        var randWord = colors[randWordIndex];     //target word
+
+        // Set random word color (make sure it doesn't match)
+
+        var randWordColorIndex = Math.floor(Math.random()*colors.length);
+        if (randWordIndex == randWordColorIndex){ //reset so word & color don't match (hopefully)
+          randWordColorIndex = Math.floor(Math.random()*colors.length);  //try once, hope it works
+        }
+        var randWordColor = colors[randWordColorIndex]    //color of target word
+
+        $("#rand-target-color").html(randWord);             //display target word and set color
+        $("#rand-target-color").css('color',randWordColor);
+        
+        return randWordColor;
+      }
+
+
+      // This function creates the actual "game" logic.
+      function createColorPicker() {
+
+        // Shuffle text color array for word disply
+        shuffle(colors);
+        //Shuffle array again for colors of displayed words
+        var wordColors = colors;
+        shuffle(wordColors)
+
+        // for now, just see if I can print it out:
+        // for (var i=0; i<colors.length; i++){
+        // $("#color-picker").append("<li>"+colors[i]+"</li>")
+        // }
+
+        // Loop through all colors in the array
+
+        for (var index = 0; index<colors.length; index++){
+
+        // Create element & output word
+          $("#color-picker").append("<li value ="+ index+ ">"+colors[index]+"</li>");
+        }   //that's all
+
+        // Make word a random color.
+        $("#color-picker, li").each(function(index){
+             $(this).css('color', wordColors[index]);
+          });   //this was tricky !! 
+
+      }   //end of create color picker
+
+
+      function shuffle(a) {   //function for shuffling an array
+        var j, x, i;
+        for (i = a.length; i; i--) {
+          j = Math.floor(Math.random() * i);
+          x = a[i - 1];
+          a[i - 1] = a[j];
+          a[j] = x;
+        }
+      }
+
+
+      // Clear the divs and arrays upon each round.
+      function clear() {
+        $("#color-picker li").remove();
+      }
+
+      
+      // Get id of element clicked by user
+      $("#color-picker").click(function(event) {
+        var $id = $(event.target);
+        console.log($id);
+        var ind = $(event.target).val();
+        var colInd = parseInt(ind);
+        console.log(colors[colInd]);
+
+        //compare their color name to the original word's color
+
+        if(colors[colInd] == targetColorOfText ){     //I am told ran_Color is not defined, though it's global
+          $("#message").html("Yes!!!")
+        }
+        else {
+          $("#message").html("NOOooo!!!")          
+        }
+
+      });
+
+      // Run game
+     
+
+  
+    });   //corresponds to document ready
+
+  </script>
+
+</body>
+</html>
