@@ -3,7 +3,7 @@ $(document).ready(function(){
 var array =[0,3,6,9,12,15,18,21];
 var element, index;
 
-$("#array-stuff").on("click",function(){
+$("#splice").on("click",function(){
     event.preventDefault(); 
     $("#array-orig").append(array+"   ");
     $("#array-orig").append('<br>');
@@ -18,8 +18,30 @@ $("#array-stuff").on("click",function(){
     console.log(array)
     $("#array-mod").append(array+"   ");
     $("#array-mod").append('<br>');
-    $("#element").append(element+", ");
-    $("#index").append(index+", "); 
+    $("#element-out").append(element+", ");
+    $("#index-out").append(index+", "); 
+});
+
+$("#push").on("click",function(){
+    event.preventDefault();
+    $("#array-orig").append(array+"   ");
+    $("#array-orig").append('<br>');
+    var element = $("#element-in").val().trim();
+    $("#element-in").val(" ");
+    var length = array.push(element);
+    $("#element-out").append(" new length = "+ length+", ");   
+    $("#array-mod").append(array+"   ");
+    $("#array-mod").append('<br>');
+});
+
+$("#pop").on("click",function(){
+    event.preventDefault();
+    $("#array-orig").append(array+"   ");
+    $("#array-orig").append('<br>');
+    var end = array.pop();
+    $("#element-out").append(end+", "); 
+    $("#array-mod").append(array+"   ");
+    $("#array-mod").append('<br>');
 });
 
 function ranTriple(){
@@ -38,5 +60,6 @@ function findOne(arrElement,many){
     console.log(which);
     return which;
 }
+
 
 })

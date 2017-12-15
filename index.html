@@ -5,36 +5,50 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>testing...</title>
+    <title>JS-JQ Playground</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
         crossorigin="anonymous">
     <link type="text/stylesheet" src="style.css">
-    <script
-    src="https://code.jquery.com/jquery-3.2.1.min.js"
-    integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-    crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
 </head>
 
 <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Navbar</a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+
+                <li class="nav-item active">
+                    <a class="nav-link" href="calculator.html">Calculator
+                        <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="arrays.html">Arrays</a>
+                </li>
+                <li class="nav-item active">
+                        <a class="nav-link" href="captain-planet-game.html">Images
+                            <span class="sr-only">(current)</span></a>
+                </li>
+
+            </ul>
+        </div>
+    </nav>
     <div class="jumbotron jumbotron-fluid">
         <div class="container">
-            <div class = "row">
-                <div class = "col">
-            <h3 class="display-2">Square Roots</h3>
-            <ul>
-              <li class="nav-item active">
-                        <a class="nav-link" href="calculator.html">Calculator
-                            <span class="sr-only">(current)</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="arrays.html">Arrays</a>
-                    </li>
-                 </ul>
+            <div class="row">
+                <div class="col">
+                    <h3 class="display-2">Rational Exponents</h3>
+
                 </div>
-                <div class = "col">
-                    <div class = "row">
-                        <div class ="col">
+                <div class="col">
+                    <div class="row">
+                        <div class="col">
                             <div id="input">
                                 <h3>Input</h3>
                             </div>
@@ -61,18 +75,22 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
-                         <form class="form-inline">
-                            <a href="https://www.w3schools.com/jsref/default.asp" class="btn btn-outline-primary" style="margin:5px">JS ref</a>
-                            <input id="data-in" class="form-control mr-sm-2" type="search" placeholder="input" aria-label="Search">
-                            <button id="press-here" class="btn btn-outline-success my-2 my-sm-0" style="margin:5px" type="submit">Don't Press This Button</button>
+                    <form class="form-inline">
+                        <a href="https://www.w3schools.com/jsref/default.asp" class="btn btn-outline-primary" style="margin:5px">JS ref</a>
+                        <p> Find the </p>
+                        <input id="num" class="form-control mr-sm-2" type="search" placeholder="num" aria-label="Search">/
+                        <input id="denom" class="form-control mr-sm-2" type="search" placeholder="denom" aria-label="Search">
+                        <p> power of </p>
+                        <input id="rad" class="form-control mr-sm-2" type="search" placeholder="radicand" aria-label="Search">
+                        <button id="press-here" class="btn btn-outline-success my-2 my-sm-0" style="margin:5px" type="submit">Don't Press This Button</button>
                     </form>
                 </ul>
             </div>
         </nav>
     </div>
-    <div class="row">
- 
-        <div class ="col">
+    <!-- <div class="row">
+
+        <div class="col">
             <div id="op">
                 <h3>Operation</h3>
             </div>
@@ -82,7 +100,7 @@
                 <h3>Other info</h3>
             </div>
         </div>
-    </div>
+    </div> -->
     <script type="text/javascript" src="practice.js">
     </script>
 </body>
