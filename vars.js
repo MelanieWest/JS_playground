@@ -2,7 +2,7 @@ $(document).ready(function () {
     
 
     
-        var dataArray = [2,"2",0,true,false,"","Mom",3.14,[1,2,3],[]];
+        var dataArray = [3.14,"3.14",0,true,false,"","Mom",Math,[1,2,3],function(){},[],null,Symbol('?'),Math];
         var data, verity;
 
         //right now, everything returns as a string.
