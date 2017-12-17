@@ -1,11 +1,23 @@
 
 $(document).ready(function(){
     
-    // Your code here...
-    
     //read the value of the button clicked
     //concatenate entered numbers until an operator is clicked
-    
+
+    //next to do:  if parens are selected, create arrays of vars and ops and use order of ops.  
+    // conditions:  sequence must be: number-op-number-op- ... -number.
+    //              they must type opening and closing parens (make auto?-keep cursor inside...)  
+    //              vars must outnumber ops by 1
+    //              can't divide by zero
+    //              for now, parentheses (if used) cannot have numbers outside of them
+    //              also for now, only one set of parens at a time (for each data value)
+    //              order of ops:  exp's, mult&div l to r, add&subt l to r
+
+        var x = []; //for use with parens at first data value
+        var y = []; //for use with parens at second data value
+        var opx = []; //for use with parens in first value
+        var opy = []; //for use with parens in second value
+        
         var opSel = false;
         var eqSel = false;
         var xSt='', ySt='', xInt=0, yInt=0, Result=0;
@@ -42,30 +54,35 @@ $(document).ready(function(){
     //execute the operations when 'equal' is pressed;
     //interpret the operations from the 'value' attribute
     $(".equal").on("click", function(){
-        xInt = parseInt(xSt);
-        yInt = parseInt(ySt);
+
+        eqSel = true;
+
+        xInt = parseInt(xSt);   //first value entered
+        yInt = parseInt(ySt);   //second value entered
+
+    switch (opVal){             //operation selected
+        case("plus"):
+            Result= xInt + yInt;
+            break;
+        case("minus"):
+            Result = xInt - yInt;
+            break;
+        case("times"):
+            Result = xInt * yInt;
+            break;
+        case("divide"):
+            Result = xInt / yInt;
+            break;
+        case("power"):
+            Result = xInt ** yInt;
+            break;
+        default:
+            Result = 0;
+            break;               
+    }
+
+    $('#result').html('<h1>' +Result +' <h1>');  
     
-    if (opVal == "plus"){
-        Result= xInt + yInt;
-        $('#result').html('<h1>'+Result+'</h1>');
-    }
-    if (opVal == 'minus'){
-        Result = xInt - yInt;
-        $('#result').html('<h1>'+Result+'<h1>');
-    }
-    if (opVal == 'times'){
-        Result = xInt * yInt;
-        $('#result').html('<h1>'+Result+'<h1>');  
-    }
-    if (opVal == 'divide'){
-        Result = xInt / yInt;
-        $('#result').html('<h1>'+Result+'<h1>');  
-    }
-    if (opVal == 'power'){
-        Result = xInt ** yInt;
-        $('#result').html('<h1>' +Result +' <h1>');  
-    }
-        
     });     //end of 'equal' function
     
     
@@ -75,6 +92,21 @@ $(document).ready(function(){
                     eqSel = false;
                     $("#first-number, #second-number, #operator, #result").html("");
     });
+
+    document.addEventListener("keydown",keydownHandler,false);
+
+    function keydownHandler(e) {   //key codes:  13= enter, 32=space bar - these two both cause a 'NaN' display
+            if (eqSel) {  
+               clear();
+            }
+    }
+
+    function clear(){
+        xSt = ySt = "";
+        opSel = false;
+        eqSel = false;
+        $("#first-number, #second-number, #operator, #result").html(""); 
+    }
     
     });     //end of document ready function
     
