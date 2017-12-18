@@ -42,7 +42,7 @@
 
       </div>
        <div class = "button">
-         <button id="start" class = "primary"> Start </button>
+         <button id="start" class = "primary"> New </button>
        </div>
     </div>
   </div>
@@ -57,15 +57,8 @@
       // Array for word colors
       var colorsOfText = ['brown','blue','magenta','teal','coral','black'];
 
-      // Target word
-      var targetColor;    //I didn't use this var - it's contained in a function & not needed outside
-
-
       // Target word color
       var targetColorOfText;
-
-      // User"s selection
-      var userAnswer;   //I didn't use this var - comparison is made within a click function
 
       // Array for words
       var colors = [
@@ -175,10 +168,11 @@
         //compare their color name to the original word's color
 
         if(colors[colInd] == targetColorOfText ){     //I am told ran_Color is not defined, though it's global
-          $("#message").html("Yes!!!")
+          $("#message").html("Yesss!!! The color of the word is: "+targetColorOfText);
+          $("#message").css('color',targetColorOfText);
         }
         else {
-          $("#message").html("NOOooo!!!")          
+          $("#message").html("NOOooo!!!  (You have to name the COLOR of the given word)")          
         }
 
       });

@@ -6,7 +6,8 @@ $(document).ready(function(){
 
     //next to do:  if parens are selected, create arrays of vars and ops and use order of ops.  
     // conditions:  sequence must be: number-op-number-op- ... -number.
-    //              they must type opening and closing parens (make auto?-keep cursor inside...)  
+    //              (mult. numbers at one time ok (concat), but only one op at a time)
+    //              they must type opening and closing parens   
     //              vars must outnumber ops by 1
     //              can't divide by zero
     //              for now, parentheses (if used) cannot have numbers outside of them
