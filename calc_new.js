@@ -21,6 +21,8 @@ $(document).ready(function(){
         var opx = []; //for use with parens in first value
         var opy = []; //for use with parens in second value
         var xTemp='', newx='', yTemp='', newy='';
+        var closex= false;  // to flag when parens are used and then closed
+        var closey= false;
         
         var paren = false;
         var opSel = false;
@@ -72,10 +74,10 @@ $(document).ready(function(){
             opVal = $(this).val();    //use the value for decision-making
 
             if(paren==true){   //this will stuff arrays until parens are closed
-                if(newx==''){       //error check  - no number entered before operator
-                    alert("You must enter a number first");                    
-                }
-                else if (opSel==false){  //stuffs arrays that resolve to first value
+                // if(newx==''){       //error check  - no number entered before operator
+                //     alert("You must enter a number first");                    
+                // }
+                if (opSel==false){  //stuffs arrays that resolve to first value
                    if(newx ==''){
                        alert('you must first enter a number');
                    }
@@ -100,9 +102,9 @@ $(document).ready(function(){
 
             }
             if(paren==false){  // this sets the operation between the two resolved values
-                if(xSt=''){     //if the first value doesn't exist
+                if(xSt==''){     //if the first value doesn't exist
                     alert("You must enter a number first");                    
-                }
+                }   
                 else{           // if the first value does exist
                     $("#operator").html("<h1>"+ op +" </h1> ");     //display the operator (text)
                     opSel = true;       //this tells calc that entries after this apply to second value        
@@ -115,25 +117,35 @@ $(document).ready(function(){
 
         p= $(this).text();          //image for display
         pVal = $(this).val();       //value for decision-making
-        if(pVal=="left-paren"){     //begin a sequence of operations in parens
-            paren = true;
+        if(pVal=="left-paren"){
+            paren = true;           //begin a sequence of operations in parens
             if(opSel==false){
-                $("#first-number").append('(');                
+                $("#first-number").append('('); //update display               
             }
             else{
-                $("#second-number").append('(');                
+                $("#second-number").append('(');  //update display                
             }
             
         }
-        else{                   //end the sequence of operations
-            paren = false;
-            if(opSel==false){
-                $("#first-number").append(')');                
+        else{             // 'right-paren' block 
+            if(paren==true){
+                paren = false;      //end the sequence of operations & resolve value(not yet done in code)
+                if(opSel==false){       //choose where to display closing paren & which # to resolve
+                    closex= true;       // ..then I am now closing a parenthetical expression for 'x'  (may not need this...    )
+                    a.push(newx);       //push in the last numerical value
+                    xSt = parseInt(a[0])+parseInt(a[1])     //test value - here is where i'll set xSt = resolved value
+                    $("#first-number").append(')');  //update display               
+                }
+                else{
+                    closey= true;       // ..then I am now closing a parenthetical expression for 'y'
+                    b.push(newy);
+                    ySt = 4    // test value - here is where i'll set ySt = resolved value
+                    $("#second-number").append(')');  //update display               
+                }
             }
             else{
-                $("#second-number").append(')');                
+                alert("Illegal operation (no right paren used)");
             }
-
         }
         alert('you chose '+p+', and boolean for parens is now '+paren);
     })
@@ -146,13 +158,19 @@ $(document).ready(function(){
 
         xInt = parseInt(xSt);   //first value entered
         $("#xVal").html("<h1>"+xInt+"</h1>");
-        $("#opEcho").html("<h1>"+ op +" </h1> ");  
+
+        $("#opEcho").html("<h1>"+ op +"</h1>"); //display operation image
+
         yInt = parseInt(ySt);   //second value entered
-        $("#yVal").html('<h1>'+yInt+'</h1>');
+        $("#yVal").html("<h1>"+yInt+"</h1>");
         
+        console.log('opVal: '+opVal);
+        console.log('a:  '+a+' b:  '+b);
+
     switch (opVal){             //operation selected
         case("plus"):
             Result= xInt + yInt;
+            console.log('xInt, yInt, Result: '+xInt+', '+yInt+', '+Result);
             break;
         case("minus"):
             Result = xInt - yInt;
@@ -167,9 +185,9 @@ $(document).ready(function(){
             Result = xInt ** yInt;
             break;
         default:
-            Result = 0;
-            break;               
+            Result = 0;              
     }
+    console.log('Result: '+Result);
 
     $('#result').html('<h1>' +Result +' <h1>');  
     
