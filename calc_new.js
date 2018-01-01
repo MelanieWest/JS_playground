@@ -133,6 +133,7 @@ $(document).ready(function(){
                 if(opSel==false){       //choose where to display closing paren & which # to resolve
                     closex= true;       // ..then I am now closing a parenthetical expression for 'x'  (may not need this...    )
                     a.push(newx);       //push in the last numerical value
+                    //for testing, assume only two values and operation is addition
                     xSt = parseInt(a[0])+parseInt(a[1])     //test value - here is where i'll set xSt = resolved value
                     $("#first-number").append(')');  //update display               
                 }
@@ -147,7 +148,7 @@ $(document).ready(function(){
                 alert("Illegal operation (no right paren used)");
             }
         }
-        alert('you chose '+p+', and boolean for parens is now '+paren);
+        // alert('you chose '+p+', and boolean for parens is now '+paren);
     })
     
     //execute the operations when 'equal' is pressed;
@@ -166,40 +167,18 @@ $(document).ready(function(){
         
         console.log('opVal: '+opVal);
         console.log('a:  '+a+' b:  '+b);
+        Result = calc(xInt,yInt,opVal);
 
-    switch (opVal){             //operation selected
-        case("plus"):
-            Result= xInt + yInt;
-            console.log('xInt, yInt, Result: '+xInt+', '+yInt+', '+Result);
-            break;
-        case("minus"):
-            Result = xInt - yInt;
-            break;
-        case("times"):
-            Result = xInt * yInt;
-            break;
-        case("divide"):
-            Result = xInt / yInt;
-            break;
-        case("power"):
-            Result = xInt ** yInt;
-            break;
-        default:
-            Result = 0;              
-    }
+    
     console.log('Result: '+Result);
 
-    $('#result').html('<h1>' +Result +' <h1>');  
+     $('#result').html('<h1>' +Result +' <h1>');  
     
     });     //end of 'equal' function
     
     
     $(".clear").on('click', function() {
-                    xSt = ySt = "";
-                    pareb = false;
-                    opSel = false;
-                    eqSel = false;
-                    $("#first-number, #second-number, #operator, #result,#xVal,#yVal,#opEcho",).html("");
+        clear();
     });
 
     document.addEventListener("keydown",keydownHandler,false);
@@ -212,11 +191,46 @@ $(document).ready(function(){
 
     function clear(){
         xSt = ySt = "";
+        a=[];
+        b=[];
+        opx=[];
+        opy=[];
+        newx='';    //clear last number entered      
+        newy='';    //clear last number entered
         paren = false;
         opSel = false;
         eqSel = false;
         $("#first-number, #second-number, #operator, #result,#xVal,#yVal,#opEcho").html(""); 
     }
     
+    function calc(x,y,op){
+        switch (op){             //operation selected
+            case("plus"):
+                Result= x + y;
+                return Result;
+                console.log('x, y, Result: '+x+', '+y+', '+Result);
+                break;
+            case("minus"):
+                Result = x - y;
+                return Result;
+                break;
+            case("times"):
+                Result = x * y;
+                return Result;
+                break;
+            case("divide"):
+                Result = x / y;
+                return Result;
+                break;
+            case("power"):
+                Result = x ** y;
+                return Result;
+                break;
+            default:
+                Result = 0;              
+                return Result;
+        }
+        console.log('Result: '+Result); 
+    }
     });     //end of document ready function
     

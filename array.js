@@ -126,7 +126,7 @@ $("#reduce").on("click",function(){
     $("#array-orig").append(placeHolder+"   ");
     $("#array-orig").append('<br>');
     var total = placeHolder.reduce(sum);            //reduce the array to a using the 'sum' function (take care to convert new elements to numbers)
-    )
+    
     var len = placeHolder.length
     var average = total/len;       //use array length to solve the average
     $("#array-mod").append(average +"   ");
