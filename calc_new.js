@@ -28,7 +28,7 @@ $(document).ready(function(){
         var opSel = false;
         var eqSel = false;
         var xSt='', ySt='', xInt=0, yInt=0, Result=0;
-        var op = '', opVal = '';
+        var op = '', opVal = '',midOpVal = '',midOp ='';
     
     
         $(".number").on("click", function() {
@@ -107,6 +107,8 @@ $(document).ready(function(){
                 }   
                 else{           // if the first value does exist
                     $("#operator").html("<h1>"+ op +" </h1> ");     //display the operator (text)
+                    midOpVal = opVal;       //preserve this for final combination
+                    midOp = op;             //preserve this for final display
                     opSel = true;       //this tells calc that entries after this apply to second value        
                 }
             }
@@ -141,7 +143,7 @@ $(document).ready(function(){
                 else{
                     closey= true;       // ..then I am now closing a parenthetical expression for 'y'
                     b.push(newy);
-                    ySt = 4    // test value - here is where i'll set ySt = resolved value
+                    ySt=calc(parseInt(b[0]),parseInt(b[1]),opy[0]);         //assume only 2 numbers and one operation so far
                     $("#second-number").append(')');  //update display               
                 }
             }
@@ -161,14 +163,14 @@ $(document).ready(function(){
         xInt = parseInt(xSt);   //first value entered
         $("#xVal").html("<h1>"+xInt+"</h1>");
 
-        $("#opEcho").html("<h1>"+ op +"</h1>"); //display operation image
+        $("#opEcho").html("<h1>"+ midOp +"</h1>"); //display operation image
 
         yInt = parseInt(ySt);   //second value entered
         $("#yVal").html("<h1>"+yInt+"</h1>");
         
-        console.log('opVal: '+opVal);
+        console.log('opVal: '+midOpVal);
         console.log('a:  '+a+' b:  '+b);
-        Result = calc(xInt,yInt,opVal);
+        Result = calc(xInt,yInt,midOpVal);
     
         console.log('Result: '+Result);
 
