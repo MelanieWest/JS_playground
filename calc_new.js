@@ -131,16 +131,18 @@ $(document).ready(function(){
         }
         else{             // 'right-paren' block 
             if(paren==true){
-                paren = false;      //end the sequence of operations & resolve value(not yet done in code)
-                if(opSel==false){       //choose where to display closing paren & which # to resolve
+                paren = false;      //end the sequence of operations & resolve value
+                if(opSel==false){       //false means I'm resolving the x-value
                     closex= true;       // ..then I am now closing a parenthetical expression for 'x'  (may not need this...    )
                     a.push(newx);       //push in the last numerical value
-                    //for testing, assume only two values and operation is addition
-                    //xSt = parseInt(a[0])+parseInt(a[1])     //test value - here is where i'll set xSt = resolved value
-                    xSt=calc(parseInt(a[0]),parseInt(a[1]),opx[0]);         //assume only 2 numbers and one operation so far
+                    xSt = parseInt(a[0]);   //recursively evaluate xSt L to R;
+                    for(var i=1;i<a.length;i++){        //for now, evaluate 2 at a time, L to R
+                        xSt = calc(parseInt(xSt),parseInt(a[i]),opx[i-1]);
+                        console.log(xSt);
+                    }
                     $("#first-number").append(')');  //update display               
                 }
-                else{
+                else{                   //in this case I'm resolving the y-value
                     closey= true;       // ..then I am now closing a parenthetical expression for 'y'
                     b.push(newy);
                     ySt=calc(parseInt(b[0]),parseInt(b[1]),opy[0]);         //assume only 2 numbers and one operation so far
@@ -148,7 +150,7 @@ $(document).ready(function(){
                 }
             }
             else{
-                alert("Illegal operation (no right paren used)");
+                alert("Illegal operation (no left paren used)");
             }
         }
         // alert('you chose '+p+', and boolean for parens is now '+paren);
@@ -168,7 +170,7 @@ $(document).ready(function(){
         yInt = parseInt(ySt);   //second value entered
         $("#yVal").html("<h1>"+yInt+"</h1>");
         
-        console.log('opVal: '+midOpVal);
+        console.log('opVal: '+midOpVal);        //cental operator preserved for final calc
         console.log('a:  '+a+' b:  '+b);
         Result = calc(xInt,yInt,midOpVal);
     
