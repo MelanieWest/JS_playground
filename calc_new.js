@@ -134,7 +134,8 @@ $(document).ready(function(){
                     closex= true;       // ..then I am now closing a parenthetical expression for 'x'  (may not need this...    )
                     a.push(newx);       //push in the last numerical value
                     //for testing, assume only two values and operation is addition
-                    xSt = parseInt(a[0])+parseInt(a[1])     //test value - here is where i'll set xSt = resolved value
+                    //xSt = parseInt(a[0])+parseInt(a[1])     //test value - here is where i'll set xSt = resolved value
+                    xSt=calc(parseInt(a[0]),parseInt(a[1]),opx[0]);         //assume only 2 numbers and one operation so far
                     $("#first-number").append(')');  //update display               
                 }
                 else{
@@ -168,9 +169,8 @@ $(document).ready(function(){
         console.log('opVal: '+opVal);
         console.log('a:  '+a+' b:  '+b);
         Result = calc(xInt,yInt,opVal);
-
     
-    console.log('Result: '+Result);
+        console.log('Result: '+Result);
 
      $('#result').html('<h1>' +Result +' <h1>');  
     
