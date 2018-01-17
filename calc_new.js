@@ -145,7 +145,7 @@ $(document).ready(function(){
                 else{                   //in this case I'm resolving the y-value
                     closey= true;       // ..then I am now closing a parenthetical expression for 'y'
                     b.push(newy);
-                    ySt=calc(parseInt(b[0]),parseInt(b[1]),opy[0]);         //assume only 2 numbers and one operation so far
+                    ySt=calc(parseInt(b[0]),parseInt(b[1]),opy[0]);         //calculate y (assume only 2 numbers and one operation so far)
                     $("#second-number").append(')');  //update display               
                 }
             }
