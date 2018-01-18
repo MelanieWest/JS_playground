@@ -52,6 +52,7 @@
       <h4 class="text-center">(not for your average dog)</h4>
       <hr>
       <div class="text-center">
+        <button class="btn btn-success btn-xst" id="get-text"><span></span>Get Text</button>
         <button class="btn btn-success btn-xst" id="get-posts"><span></span>Get Posts</button>
       </div>
 
@@ -116,24 +117,38 @@
         <!-- World Map Image -->
         <img src="Assets/wallppr_wrldmap.jpg" alt="" class="world-map" style="position:absolute; top:50px; left: 80px; z-index: -20; height: 300px">
         <div id="output"></div>
+        <form id="add-post">
+          <div>
+            <input type = "text" id ="title" placeholder = "title">
+          </div>
+          <div>
+            <textarea id = "body" placeholder="body"></textarea>
+          </div>
+          <input type="submit" value="Submit">
+        </form>
       </div>
     </div>
   </div>
 
   <script>
 
-    // JavaScript function that wraps everything
-
-
-      // var request = new Request('https://api.github.com/users/andersontr15');
-
-      // fetch(request).then(function(response){
-      //   return response.json().then(function(json) {
-      //     console.log(json);
-      //   }) 
-      // });
-
       //work thru traversy 'fetch' video
+      document.getElementById('get-text').addEventListener('click',getText);
+//fetch.html:140 Fetch API cannot load file:///C:/Users/dhmof/Desktop/bootcamp/DailyPractice/Javascript_skills/JS_playground/sample.txt. URL scheme must be "http" or "https" for CORS request.
+// this doesn't work, and i cant find a good reason why.  Googling the error message (with filepath reemoved) does not help.
+
+      function getText(){
+        console.log('getText');
+        fetch('sample.txt')
+        .then(function(res){
+          return res.text()
+        })
+        .then(function(text){
+          console.log(text);
+        })
+      }
+
+
 
       document.getElementById('get-posts').addEventListener('click',getPosts);
 
@@ -146,6 +161,7 @@
             output+= `
               <div>
                 <h3>${post.title}</h3>
+                <p>${post.body}</p>
               </div>
             `;
           });
@@ -154,7 +170,24 @@
 
       }
 
+      document.getElementById('add-post').addEventListener('click',addPost);
 
+      function addPost(e){
+        e.preventDefault();
+        let title = document.getElementById('title').value;
+        let body = document.getElementById('body').value;
+
+        fetch('https://jsonplaceholder.typicode.com/posts',{
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json, text/plain, */*',
+            'Content-type':'application/json'
+          },
+          body:JSON.stringify({title: title, body:body})
+        })
+        .then((res)=>res.json())
+        .then((data)=>console.log(data))
+      }
 
 
       $(document).ready(function() {
