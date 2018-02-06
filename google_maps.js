@@ -40,7 +40,7 @@ zip = 60606;   //chicago
 //zip = 97215;   //portland
 //zip = 90081;   //LA
 // zip = 90210;    //beverly hills
-
+// zip = 32819;    //I-drive by cinemark
 
 
 function mapSetUp(){
@@ -143,7 +143,7 @@ function callback(results, status) {
 
 }           // end of callback function
 
-
+ 
 
 });   // end of document ready
 
