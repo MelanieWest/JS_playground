@@ -141,15 +141,20 @@
                 zoom: 15      //zoom: 0 shows the whole earth.  Bigger #'s are closer in
               });         // draw the map (zoom: 15 gives a map that's about 1 mile to a side)
 
-            var request = {
+            var request = {   //this is searching for businesses that match the theme - not currently working
               location: city,
               radius: searchRad,
               type: [theme]
             };        //end of request parameter object
 
+            var marker = new google.maps.Marker({   //this places a marker in the middle of the map
+            position: city,
+            map: map
+          });
+
             service = new google.maps.places.PlacesService(map);
   //          service.nearbySearch(request, callback);
-            service.nearbySearch(request);
+            service.nearbySearch(request,callback);
 
             }      
 
