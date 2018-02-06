@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+       #map {
+        height: 400px;
+        width: 100%;
+       }
+    </style>
+    <script
+    src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+  </head>
+  <body>
+
+    <h3>My Google Maps Demo</h3>
+
+    <br>
+    <!--Add input form-->
+    <div id="display">
+
+
+        <!-- <form id="animal-form">
+            <label for="animal-input">Animal Type</label>
+            <input type="text" id="animal-input">
+       
+            <!-- Input looks like a button; it triggers new animal to be added -->
+            <!-- <input id="add-animal" type="submit" value="New Animal">
+          </form> -->
+        
+        <form id="location">
+            <label for="zip-input"><p>Enter your zip code</p></label>
+            <input type="number" id="zip-input"><br>
+            <input id="current-zip" type="submit" value="zip code">
+        </form>
+
+    </div>
+    <div id = "display">
+      <div id = "map"></div>
+    </div>
+
+
+    <script>
+   $(document).ready(function(){
+
+    var zip = [];
+
+   $("#current-zip").on("click", function(event) {
+    
+    //prevents submit button from trying to send a form.
+    event.preventDefault();
+    var input = $("#zip-input").val().trim();
+
+    zip.push(input);
+    console.log(zip);
+    $("#zip-input").val(' ');  //empty the box
+
+    // The getLocation function is called using the current zip code
+    
+    //getLocation();
+    initMap();
+
+});
+
+
+
+
+
+    // const zip = document.getElementById("zip");
+    // zip.addEventListener("click",getLocation);
+
+    function getLocation(){
+      //call the zip code API to get lat & lon
+
+      initMap();
+
+    }
+
+      function initMap() {
+        var uluru = {lat: -25.363, lng: 131.044};
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 4,
+          center: uluru
+        });
+        var marker = new google.maps.Marker({
+          position: uluru,
+          map: map
+        });
+      }
+
+
+
+    });  //end of document ready
+
+    </script>
+    <script async defer type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCemlvhdvu74R6GZj5qODtWViZDiHuazjE&libraries=places"></script>
+    <!-- <script async defer type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCemlvhdvu74R6GZj5qODtWViZDiHuazjE&libraries=places&callback=initMap"></script> -->
+
+    <!-- <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCemlvhdvu74R6GZj5qODtWViZDiHuazjE&libraries=places&callback=initMap">
+    </script> -->
+    <!--<script type= "text/javascript" src="google_maps.js"></script> -->
+  </body>
+</html>
