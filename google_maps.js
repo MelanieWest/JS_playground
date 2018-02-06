@@ -46,7 +46,7 @@ zip = 60606;   //chicago
 function mapSetUp(){
 
 zip = this.val().trim();
-console.log('Zip code is: ',zip);
+console.log('Zip code is: ',zip); 
 
 var cors = 'https://cors-bcs.herokuapp.com/';
 
