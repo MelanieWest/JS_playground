@@ -15,10 +15,10 @@ $(document).ready(function () {
   var theme;
 
   ranNum = Math.floor(Math.random() * 8); //used to select a random activity
-  theme = activePlaces[ranNum];
-  //var theme = 'restaurant';
+  //theme = activePlaces[ranNum];
+  theme = 'restaurant';
 
-  var zip = [];
+  var zip;
 
   $("#current-zip").on("click", function (event) {
 
@@ -26,7 +26,7 @@ $(document).ready(function () {
     event.preventDefault();
     var input = $("#zip-input").val().trim();
 
-    zip.push(input);
+    zip = input;
     console.log(zip);
     $("#zip-input").val(' ');  //empty the box
 
@@ -34,7 +34,9 @@ $(document).ready(function () {
 
     getLocation(input);
     ranNum = Math.floor(Math.random() * 8); //used to select a random activity
-    theme = activePlaces[ranNum];
+    //theme = activePlaces[ranNum];
+    theme = 'restaurant';
+
     return theme;
 
   });
@@ -71,10 +73,10 @@ $(document).ready(function () {
 
       google.maps.event.addDomListener(window, 'load', initialize(lat, lng, theme));
 
-      //initialize(lat,lng,theme);
+
 
     });
-    return theme;
+
   }     //end of zip code API call function
 
 
@@ -100,10 +102,10 @@ $(document).ready(function () {
       type: [theme]
     };        //end of request parameter object
 
-    //   var marker = new google.maps.Marker({   //this places a marker in the middle of the map
-    //   position: city,
-    //   map: map
-    // });
+      var marker = new google.maps.Marker({   //this places a marker in the middle of the map
+      position: city,
+      map: map
+    });
 
     service = new google.maps.places.PlacesService(map);
     service.nearbySearch(request, callback);
