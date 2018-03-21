@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>HTML5 Canvas</title>
+</head>
+<body>
+
+<canvas id="draw" width="800" height="800" style="border:5px solid #da1b1b; background-color:green"></canvas>
+
+<script>
+
+const canvas = document.querySelector('#draw');
+
+//we actually draw on the context, not the canvas:
+const ctx = canvas.getContext('2d');
+
+//set the canvas size here - this will override the html settings
+//this was tested and works fine - the canvas fills the screen.
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+ctx.fillStyle = "#FFFFFF";
+
+ctx.font = "30px Arial";
+ctx.fillText("Hello World",10,50);
+
+let bubbles =[];
+
+for(var i=0; i<4;i++){
+  bubbles[i] = new Bubble();
+  bubbles[i].draw();
+  bubbles[i].move();
+}
+
+
+function Bubble(){
+  this.x = Math.floor(Math.random()*400);
+  this.y = Math.floor(Math.random()*400);
+  this.r = Math.floor(Math.random()*100);
+
+  function draw(){
+    ctx.beginPath();
+    ctx.arc(this.x,this.y,this.r,0,2*Math.PI);
+    ctx.fill();
+  }
+
+  function move(){
+    this.x = this.x+ Math.floor(Math.random()*10-5);
+    this.y = this.y+ Math.floor(Math.random()*10-5);
+    this.draw();
+  }
+
+}
+
+</script>
+</body>
+</html>
