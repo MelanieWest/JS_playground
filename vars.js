@@ -7,6 +7,7 @@ $(document).ready(function () {
 
         //right now, everything returns as a string.
     
+
         $("#check").on("click", function () {
             event.preventDefault();
             //var data = $("#data").val().trim();
@@ -26,7 +27,9 @@ $(document).ready(function () {
  
         })
     
-    
+        //this was added to log the properties of a string object.  Haven't tested it yet.
+        console.log(Object.getOwnPropertyNames(String.prototype));
+
         function logic(A,B,op) {
             // ans = A op B;
             return ans;
